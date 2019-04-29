@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { WeatherCoreComponent } from './weather-core.component';
+import {NgModule} from '@angular/core';
 
 @NgModule({
-  declarations: [WeatherCoreComponent],
-  imports: [
-  ],
-  exports: [WeatherCoreComponent]
+  declarations: [],
+  imports: [],
+  exports: []
 })
-export class WeatherCoreModule { }
+export class WeatherCoreModule {
+}
