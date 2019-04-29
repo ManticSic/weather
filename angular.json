@@ -168,6 +168,137 @@
           }
         }
       }
+    },
+    "weather-web": {
+      "root": "projects/weather-web/",
+      "sourceRoot": "projects/weather-web/src",
+      "projectType": "application",
+      "prefix": "weather-core",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/weather-web",
+            "index": "projects/weather-web/src/index.html",
+            "main": "projects/weather-web/src/main.ts",
+            "polyfills": "projects/weather-web/src/polyfills.ts",
+            "tsConfig": "projects/weather-web/tsconfig.app.json",
+            "assets": [
+              "projects/weather-web/src/favicon.ico",
+              "projects/weather-web/src/assets"
+            ],
+            "styles": [
+              "projects/weather-web/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/weather-web/src/environments/environment.ts",
+                  "with": "projects/weather-web/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "weather-web:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "weather-web:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "weather-web:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/weather-web/src/test.ts",
+            "polyfills": "projects/weather-web/src/polyfills.ts",
+            "tsConfig": "projects/weather-web/tsconfig.spec.json",
+            "karmaConfig": "projects/weather-web/karma.conf.js",
+            "styles": [
+              "projects/weather-web/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/weather-web/src/favicon.ico",
+              "projects/weather-web/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/weather-web/tsconfig.app.json",
+              "projects/weather-web/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "weather-web-e2e": {
+      "root": "projects/weather-web-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/weather-web-e2e/protractor.conf.js",
+            "devServerTarget": "weather-web:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "weather-web:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/weather-web-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "WeatherApp"
