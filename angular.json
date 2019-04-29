@@ -42,7 +42,7 @@
       "root": "projects/weather-web/",
       "sourceRoot": "projects/weather-web/src",
       "projectType": "application",
-      "prefix": "weather-core",
+      "prefix": "weather-web",
       "schematics": {
         "@schematics/angular:component": {
           "styleext": "scss"
