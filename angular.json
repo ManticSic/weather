@@ -133,6 +133,41 @@
           }
         }
       }
+    },
+    "weather-core": {
+      "root": "projects/weather-core",
+      "sourceRoot": "projects/weather-core/src",
+      "projectType": "library",
+      "prefix": "weather-core",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/weather-core/tsconfig.lib.json",
+            "project": "projects/weather-core/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/weather-core/src/test.ts",
+            "tsConfig": "projects/weather-core/tsconfig.spec.json",
+            "karmaConfig": "projects/weather-core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/weather-core/tsconfig.lib.json",
+              "projects/weather-core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "WeatherApp"

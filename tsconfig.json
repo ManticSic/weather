@@ -16,6 +16,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "weather-core": [
+        "dist/weather-core"
+      ],
+      "weather-core/*": [
+        "dist/weather-core/*"
+      ]
+    }
   }
 }
