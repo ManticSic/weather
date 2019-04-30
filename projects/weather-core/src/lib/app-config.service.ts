@@ -24,6 +24,7 @@ export class AppConfigService {
   }
 
   public save(config: IAppConfig): void {
+    localStorage.setItem(AppConfigService.APP_CONFIG_LS_KEY, JSON.stringify(config));
     this.appConfig$.next(config);
   }
 
