@@ -16,18 +16,16 @@ export class AppComponent {
     const config: IAppConfig = {
       locations: [
         {
-          country: 'Germany',
+          country: 'Deutschland',
           city: 'Northeim',
-          zipCode: '371',
-          lat: 0,
-          long: 0,
+          lat: 51.705401,
+          long: 9.9972782,
         },
         {
           country: 'Germany',
           city: 'Goettingen',
-          zipCode: '371',
-          lat: 1,
-          long: 1,
+          lat: 51.5327604,
+          long: 9.9352051,
         }
       ]
     };
