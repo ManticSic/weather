@@ -1,8 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  --background: dimgray;
+  --color: whitesmoke;
+}
+
 html, body {
   margin: 0;
   padding: 0;
+
+  background: var(--background);
+  color: var(--color);
 }
 
 * {
