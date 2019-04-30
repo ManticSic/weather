@@ -9,6 +9,11 @@ header {
   .title {
     font-size: 1.5rem;
     flex: 1 1 auto;
+
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
   }
 
   .menu {
