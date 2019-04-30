@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {AppConfigService, IAppConfig} from 'weather-core';
 
 @Component({
   selector: 'weather-web-root',
@@ -6,5 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'weather-web';
+
+  constructor(
+    private appConfig: AppConfigService
+  ) {
+    const config: IAppConfig = {
+      locations: [
+        {
+          country: 'Germany',
+          city: 'Northeim',
+          zipCode: '371',
+          lat: 0,
+          long: 0,
+        }
+      ]
+    };
+
+    this.appConfig.save(config);
+  }
 }
