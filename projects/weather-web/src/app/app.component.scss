@@ -37,6 +37,12 @@ header {
         display: flex;
         flex-direction: row;
 
+        .link-wrapper {
+          display: flex;
+          flex-direction: row;
+          flex: 1 1 auto;
+        }
+
         .menu-item-title {
           flex: 1 1 auto;
           max-width: 60vw;
