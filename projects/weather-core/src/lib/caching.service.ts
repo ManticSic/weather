@@ -61,6 +61,8 @@ export class CachingService implements HttpInterceptor {
         this.clear(v);
       }
     });
+
+    this.save();
   }
 
   private isExpired(entry: ICacheEntry): boolean {
