@@ -11,7 +11,7 @@ import {ISavedLocation} from "../../../weather-core/src/lib/models/saved-locatio
 export class AppComponent {
 
   constructor(
-    private appConfig: AppConfigService,
+    public appConfig: AppConfigService,
     private router: Router,
   ) {
     const config: IAppConfig = {

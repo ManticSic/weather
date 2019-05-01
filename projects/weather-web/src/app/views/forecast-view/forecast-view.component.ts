@@ -12,8 +12,8 @@ import {NominatimService, ILocation} from "weather-core";
 })
 export class ForecastViewComponent implements OnInit, OnDestroy {
 
+  public address$: BehaviorSubject<ILocation> = new BehaviorSubject(null);
   private osmId$: BehaviorSubject<number> = new BehaviorSubject(null);
-  private address$: BehaviorSubject<ILocation> = new BehaviorSubject(null);
 
   private destroy$: Subject<boolean> = new Subject();
 
