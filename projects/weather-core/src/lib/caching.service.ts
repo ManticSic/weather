@@ -26,8 +26,8 @@ export class CachingService implements HttpInterceptor {
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const entry: ICacheEntry | null = this.cache.get(req.urlWithParams);
 
-    if (entry && !this.isExpired(entry)) {
-      of(entry);
+    if (!!entry && !this.isExpired(entry)) {
+      return of(entry.event);
     }
 
     return next.handle(req)
