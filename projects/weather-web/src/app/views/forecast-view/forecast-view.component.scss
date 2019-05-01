@@ -1,0 +1,10 @@
+.heading {
+  display: flex;
+  justify-content: center;
+  font-family: var(--font-mono);
+
+  .address {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+}
