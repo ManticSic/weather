@@ -1,7 +1,7 @@
-import {HttpRequest, HttpEvent} from "@angular/common/http";
+import {HttpRequest, HttpResponse} from "@angular/common/http";
 
 export interface ICacheEntry {
   request: HttpRequest<any>;
-  event: HttpEvent<any>;
+  response: HttpResponse<any>;
   time: number;
 }
