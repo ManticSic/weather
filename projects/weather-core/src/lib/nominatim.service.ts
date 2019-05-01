@@ -17,19 +17,15 @@ export class NominatimService {
   }
 
   public search(query: string): Observable<ILocation> {
-    return this.http.get<IOpenStreetMapFormat>(this.buildSearchUrl(query))
-      .pipe(map(osmObject => {
-        return {
-          lat: +osmObject.lat,
-          lon: +osmObject.lon,
-          city: osmObject.address.town,
-          country: osmObject.address.country
-        }
-      }));
+    return this.getLocationFromNominatim(this.buildSearchUrl(query));
   }
 
   public reverse(lat: number, lon: number): Observable<ILocation> {
-    return this.http.get<IOpenStreetMapFormat>(this.buildReverseUrl(lat, lon))
+    return this.getLocationFromNominatim(this.buildReverseUrl(lat, lon));
+  }
+
+  private getLocationFromNominatim(url: string): Observable<ILocation> {
+    return this.http.get<IOpenStreetMapFormat>(url)
       .pipe(map(osmObject => {
         return {
           lat: +osmObject.lat,
