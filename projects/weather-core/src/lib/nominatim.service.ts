@@ -30,7 +30,7 @@ export class NominatimService {
         return {
           lat: +osmObject.lat,
           lon: +osmObject.lon,
-          city: osmObject.address.town,
+          city: osmObject.address.city,
           country: osmObject.address.country,
           state: osmObject.address.state,
           osmId: osmObject.osm_id

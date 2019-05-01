@@ -9,7 +9,7 @@ export interface IOpenStreetMapFormat {
   address: {
     common: string;
     pedestrian: string;
-    town: string;
+    city: string;
     county: string;
     state: string;
     postcode: string;
