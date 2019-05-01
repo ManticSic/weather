@@ -18,12 +18,14 @@ export class AppComponent {
         {
           country: 'Deutschland',
           city: 'Northeim',
+          state: 'Niedersachsen',
           lat: 51.705401,
           lon: 9.9972782,
         },
         {
           country: 'Germany',
           city: 'Goettingen',
+          state: 'Niedersachsen',
           lat: 51.5327604,
           lon: 9.9352051,
         }
