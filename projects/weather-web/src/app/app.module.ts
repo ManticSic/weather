@@ -18,7 +18,15 @@ import {HttpClientModule} from "@angular/common/http";
     HttpClientModule,
     WeatherWebRoutingModule,
     BrowserModule,
-    WeatherCoreModule,
+    WeatherCoreModule.forRoot({
+      darkSky: {
+        secret: '',
+      },
+      cache: {
+        maxAge: 1000 * 60 * 60 * 4,
+        cleanupInterval: 1000 * 60
+      }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
