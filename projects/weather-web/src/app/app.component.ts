@@ -19,13 +19,13 @@ export class AppComponent {
           country: 'Deutschland',
           city: 'Northeim',
           lat: 51.705401,
-          long: 9.9972782,
+          lon: 9.9972782,
         },
         {
           country: 'Germany',
           city: 'Goettingen',
           lat: 51.5327604,
-          long: 9.9352051,
+          lon: 9.9352051,
         }
       ]
     };
@@ -34,6 +34,6 @@ export class AppComponent {
   }
 
   public openLocation(location: ILocation): void {
-    this.router.navigate(['/', 'forecast', location.lat, location.long]);
+    this.router.navigate(['/', 'forecast', location.lat, location.lon]);
   }
 }
