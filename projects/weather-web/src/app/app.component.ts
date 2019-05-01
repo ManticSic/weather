@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {AppConfigService, IAppConfig, ILocation} from 'weather-core';
+import {Router} from "@angular/router";
+import {ISavedLocation} from "../../../weather-core/src/lib/models/saved-location.interface";
 
 @Component({
   selector: 'weather-web-root',
@@ -6,5 +9,32 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'weather-web';
+
+  constructor(
+    private appConfig: AppConfigService,
+    private router: Router,
+  ) {
+    const config: IAppConfig = {
+      locations: [
+        {
+          country: 'Deutschland',
+          city: 'Northeim',
+          state: 'Niedersachsen',
+          osmId: 1397834
+        },
+        {
+          country: 'Germany',
+          city: 'Goettingen',
+          state: 'Niedersachsen',
+          osmId: 191361
+        }
+      ]
+    };
+
+    this.appConfig.save(config);
+  }
+
+  public openLocation(location: ISavedLocation): void {
+    this.router.navigate(['/', 'forecast', location.osmId]);
+  }
 }

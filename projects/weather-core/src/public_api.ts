@@ -5,6 +5,7 @@
 export * from './lib/weather-core.module';
 
 export * from './lib/app-config.service'
+export * from './lib/nominatim.service'
 
 export * from './lib/models/app-config.interface';
 export * from './lib/models/cache-config.interface';

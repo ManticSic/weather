@@ -1,5 +1,5 @@
-import {ILocation} from "./location.interface";
+import {ISavedLocation} from "./saved-location.interface";
 
 export interface IAppConfig {
-  locations: ILocation[];
+  locations: ISavedLocation[];
 }

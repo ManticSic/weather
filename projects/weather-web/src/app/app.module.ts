@@ -1,16 +1,27 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
+import {WeatherCoreModule} from "weather-core";
+import {WeatherWebRoutingModule} from "./routing.module";
+import {ForecastViewComponent} from './views/forecast-view/forecast-view.component';
+import {LandingViewComponent} from './views/landing-view/landing-view.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ForecastViewComponent,
+    LandingViewComponent
   ],
   imports: [
-    BrowserModule
+    HttpClientModule,
+    WeatherWebRoutingModule,
+    BrowserModule,
+    WeatherCoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
