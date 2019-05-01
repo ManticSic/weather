@@ -62,7 +62,10 @@
               "projects/weather-web/src/assets"
             ],
             "styles": [
-              "projects/weather-web/src/styles.scss"
+              "projects/weather-web/src/styles.scss",
+              {
+                "input": "./node_modules/weather-icons/css/weather-icons.css"
+              }
             ],
             "scripts": []
           },
