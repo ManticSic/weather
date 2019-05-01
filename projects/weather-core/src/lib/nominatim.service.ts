@@ -17,7 +17,15 @@ export class NominatimService {
   }
 
   public search(query: string): Observable<ILocation> {
-    throw new Error('Not implemented yet');
+    return this.http.get<IOpenStreetMapFormat>(this.buildSearchUrl(query))
+      .pipe(map(osmObject => {
+        return {
+          lat: +osmObject.lat,
+          lon: +osmObject.lon,
+          city: osmObject.address.town,
+          country: osmObject.address.country
+        }
+      }));
   }
 
   public reverse(lat: number, lon: number): Observable<ILocation> {
@@ -36,5 +44,8 @@ export class NominatimService {
     return `${this.baseUrl}?lat=${lat}&lon=${lon}&format=json`;
   }
 
+  private buildSearchUrl(query: string): string {
+    return `${this.baseUrl}?q=${encodeURIComponent(query)}&format=json&addressdetails=1}`
+  }
 
 }
