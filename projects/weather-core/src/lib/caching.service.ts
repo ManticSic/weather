@@ -11,12 +11,16 @@ import {tap} from "rxjs/operators";
 })
 export class CachingService implements HttpInterceptor {
 
-  private cache: Map<string, ICacheEntry> = new Map<string, ICacheEntry>();
+  private static CACHE_LS_KEY: string = "weather.core.cache";
+
+  private cache: Map<string, ICacheEntry>;
 
   constructor(
     @Inject(MODULE_CONFIG) private moduleConfig: IModuleConfig
   ) {
-    // todo let entries delet themself
+    this.cache = this.load();
+
+    // todo let entries delete itself
     interval(this.moduleConfig.cache.cleanupInterval)
       .subscribe(x => {
         this.deleteExpired();
@@ -27,22 +31,24 @@ export class CachingService implements HttpInterceptor {
     const entry: ICacheEntry | null = this.cache.get(req.urlWithParams);
 
     if (!!entry && !this.isExpired(entry)) {
-      return of(entry.event);
+      return of(new HttpResponse({body: entry.response.body}));
     }
 
     return next.handle(req)
-      .pipe(tap(event => {
-        this.put(req, event);
+      .pipe(tap(response => {
+        this.put(req, response as HttpResponse<any>);
       }));
   }
 
-  private put(req: HttpRequest<any>, event: HttpEvent<any>): void {
+  private put(req: HttpRequest<any>, response: HttpResponse<any>): void {
     const entry: ICacheEntry = {
       request: req,
-      event: event,
+      response: response,
       time: Date.now()
     };
     this.cache.set(req.urlWithParams, entry);
+
+    this.save();
   }
 
   private clear(entry: ICacheEntry): void {
@@ -60,5 +66,24 @@ export class CachingService implements HttpInterceptor {
   private isExpired(entry: ICacheEntry): boolean {
     const currentTime: number = Date.now();
     return (currentTime - entry.time) > this.moduleConfig.cache.maxAge
+  }
+
+  private save(): void {
+    localStorage.setItem(CachingService.CACHE_LS_KEY, JSON.stringify(Array.from(this.cache)));
+  }
+
+  private load(): Map<string, ICacheEntry> {
+    const lsData: string | null = localStorage.getItem(CachingService.CACHE_LS_KEY);
+
+    if (lsData === null) {
+      return new Map<string, ICacheEntry>();
+    }
+
+    try {
+      return new Map<string, ICacheEntry>(JSON.parse(lsData));
+    } catch (e) {
+      console.warn('Failed to parse cache data from local storage', e);
+      return new Map<string, ICacheEntry>();
+    }
   }
 }
