@@ -5,7 +5,8 @@ import {AppComponent} from './app.component';
 import {WeatherCoreModule} from "weather-core";
 import {WeatherWebRoutingModule} from "./routing.module";
 import {ForecastViewComponent} from './views/forecast-view/forecast-view.component';
-import { LandingViewComponent } from './views/landing-view/landing-view.component';
+import {LandingViewComponent} from './views/landing-view/landing-view.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { LandingViewComponent } from './views/landing-view/landing-view.componen
     LandingViewComponent
   ],
   imports: [
+    HttpClientModule,
     WeatherWebRoutingModule,
     BrowserModule,
     WeatherCoreModule,
