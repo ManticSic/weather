@@ -14,7 +14,7 @@ export class ForecastViewComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<boolean> = new Subject();
 
-  private coordinates$: AsyncSubject<ILatLon> = new AsyncSubject();
+  private osmId: AsyncSubject<number> = new AsyncSubject();
   private address$: AsyncSubject<ILocation> = new AsyncSubject();
 
   constructor(
@@ -27,23 +27,15 @@ export class ForecastViewComponent implements OnInit, OnDestroy {
     this.route.paramMap
       .pipe(takeUntil(this.destroy$))
       .subscribe(paramMap => {
-        const latParamValue: string = paramMap.get('lat');
-        const lonParamValue: string = paramMap.get('lon');
+        const osmId: string = paramMap.get('osmId');
 
-        const latValue: number = +latParamValue;
-        const lonValue: number = +lonParamValue;
-
-        this.coordinates$.next({
-          lat: latValue,
-          lon: lonValue,
-        });
-
-        this.coordinates$.complete();
+        this.osmId.next(+osmId);
+        this.osmId.complete();
       });
 
-    this.coordinates$
+    this.osmId
       .pipe(takeUntil(this.destroy$))
-      .pipe(mergeMap(latLon => this.nominatim.reverse(latLon.lat, latLon.lon)))
+      .pipe(mergeMap(osmId => this.nominatim.reverse(osmId)))
       .subscribe(address => {
         this.address$.next(address);
         this.address$.complete();
@@ -54,7 +46,7 @@ export class ForecastViewComponent implements OnInit, OnDestroy {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
 
-    this.coordinates$.unsubscribe();
+    this.osmId.unsubscribe();
   }
 
 }

@@ -9,7 +9,7 @@ const routes: Routes = [
     component: LandingViewComponent,
   },
   {
-    path: 'forecast/:lat/:lon',
+    path: 'forecast/:osmId',
     component: ForecastViewComponent,
   },
   {

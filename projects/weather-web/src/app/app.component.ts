@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AppConfigService, IAppConfig, ILocation} from 'weather-core';
 import {Router} from "@angular/router";
+import {ISavedLocation} from "../../../weather-core/src/lib/models/saved-location.interface";
 
 @Component({
   selector: 'weather-web-root',
@@ -19,15 +20,13 @@ export class AppComponent {
           country: 'Deutschland',
           city: 'Northeim',
           state: 'Niedersachsen',
-          lat: 51.705401,
-          lon: 9.9972782,
+          osmId: 1397834
         },
         {
           country: 'Germany',
           city: 'Goettingen',
           state: 'Niedersachsen',
-          lat: 51.5327604,
-          lon: 9.9352051,
+          osmId: 191361
         }
       ]
     };
@@ -35,7 +34,7 @@ export class AppComponent {
     this.appConfig.save(config);
   }
 
-  public openLocation(location: ILocation): void {
-    this.router.navigate(['/', 'forecast', location.lat, location.lon]);
+  public openLocation(location: ISavedLocation): void {
+    this.router.navigate(['/', 'forecast', location.osmId]);
   }
 }
