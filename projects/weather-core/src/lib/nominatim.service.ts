@@ -20,8 +20,8 @@ export class NominatimService {
     return this.getLocationFromNominatim(this.buildSearchUrl(query));
   }
 
-  public reverse(lat: number, lon: number): Observable<ILocation> {
-    return this.getLocationFromNominatim(this.buildReverseUrl(lat, lon));
+  public reverse(osmId: number): Observable<ILocation> {
+    return this.getLocationFromNominatim(this.buildReverseUrl(osmId, 'R'));
   }
 
   private getLocationFromNominatim(url: string): Observable<ILocation> {
@@ -33,12 +33,13 @@ export class NominatimService {
           city: osmObject.address.town,
           country: osmObject.address.country,
           state: osmObject.address.state,
+          osmId: osmObject.osm_id
         };
       }));
   }
 
-  private buildReverseUrl(lat: number, lon: number): string {
-    return `${this.baseUrl}/reverse?lat=${lat}&lon=${lon}&format=json`;
+  private buildReverseUrl(osmId: number, osmType: string): string {
+    return `${this.baseUrl}/reverse?osm_id=${osmId}&osm_type=${osmType}&format=json`;
   }
 
   private buildSearchUrl(query: string): string {
