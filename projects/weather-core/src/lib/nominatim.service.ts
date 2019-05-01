@@ -31,7 +31,8 @@ export class NominatimService {
           lat: +osmObject.lat,
           lon: +osmObject.lon,
           city: osmObject.address.town,
-          country: osmObject.address.country
+          country: osmObject.address.country,
+          state: osmObject.address.state,
         };
       }));
   }
