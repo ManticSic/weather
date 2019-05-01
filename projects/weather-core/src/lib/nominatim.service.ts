@@ -37,11 +37,11 @@ export class NominatimService {
   }
 
   private buildReverseUrl(lat: number, lon: number): string {
-    return `${this.baseUrl}?lat=${lat}&lon=${lon}&format=json`;
+    return `${this.baseUrl}/reverse?lat=${lat}&lon=${lon}&format=json`;
   }
 
   private buildSearchUrl(query: string): string {
-    return `${this.baseUrl}?q=${encodeURIComponent(query)}&format=json&addressdetails=1}`
+    return `${this.baseUrl}/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1}`
   }
 
 }

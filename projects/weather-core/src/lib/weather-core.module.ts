@@ -9,11 +9,11 @@ import {CachingService} from "./caching.service";
   imports: [],
   exports: [],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CachingService,
-      multi: true,
-    }
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: CachingService,
+    //   multi: true,
+    // }
   ]
 })
 export class WeatherCoreModule {
