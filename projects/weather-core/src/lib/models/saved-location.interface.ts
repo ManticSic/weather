@@ -1,8 +1,6 @@
-export interface ILocation {
+export interface ISavedLocation {
   city: string;
   country: string;
   state: string;
-  lon: number;
-  lat: number;
   osmId: number;
 }
