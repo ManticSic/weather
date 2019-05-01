@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {AsyncSubject, Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
+import {mergeMap, takeUntil} from "rxjs/operators";
 import {ILatLon} from "../../models/lat-lon.interface";
+import {NominatimService, ILocation} from "weather-core";
 
 @Component({
   selector: 'weather-web-forecast-view',
@@ -14,9 +15,11 @@ export class ForecastViewComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject();
 
   private coordinates$: AsyncSubject<ILatLon> = new AsyncSubject();
+  private address$: AsyncSubject<ILocation> = new AsyncSubject();
 
   constructor(
     private route: ActivatedRoute,
+    private nominatim: NominatimService,
   ) {
   }
 
@@ -37,11 +40,21 @@ export class ForecastViewComponent implements OnInit, OnDestroy {
 
         this.coordinates$.complete();
       });
+
+    this.coordinates$
+      .pipe(takeUntil(this.destroy$))
+      .pipe(mergeMap(latLon => this.nominatim.reverse(latLon.lat, latLon.lon)))
+      .subscribe(address => {
+        this.address$.next(address);
+        this.address$.complete();
+      });
   }
 
   public ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
+
+    this.coordinates$.unsubscribe();
   }
 
 }
